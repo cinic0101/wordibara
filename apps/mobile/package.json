@@ -9,6 +9,7 @@
     "ios": "expo start --ios",
     "android": "expo start --android",
     "android:dev": "expo run:android",
+    "android:release": "expo run:android --variant release",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

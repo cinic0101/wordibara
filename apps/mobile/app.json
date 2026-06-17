@@ -16,6 +16,9 @@
     "experiments": {
       "typedRoutes": true
     },
+    "android": {
+      "package": "com.d3rekw.wordibara"
+    },
     "web": {
       "bundler": "metro",
       "output": "single"

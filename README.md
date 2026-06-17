@@ -44,7 +44,7 @@ make android
 
 That starts Expo and opens the app through Expo Go, which is the fastest v1 workflow.
 
-For an actual debug APK install on the emulator:
+If you do not want the Expo Go launcher/debug pages, install Wordibara directly on the emulator:
 
 ```sh
 npm run mobile:android:dev
@@ -52,7 +52,15 @@ npm run mobile:android:dev
 make android-dev
 ```
 
-Use the debug build path only when you need native build behavior. It may generate native Android project files.
+Use this native debug build when you want the emulator to open the Wordibara app directly. It may generate native Android project files.
+
+For a production-like local Android install:
+
+```sh
+npm run mobile:android:release
+# or
+make android-release
+```
 
 ## Word Packs
 

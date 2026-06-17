@@ -1,4 +1,4 @@
-.PHONY: install mobile web android android-dev typecheck extract-words
+.PHONY: install mobile web android android-dev android-release typecheck extract-words
 
 install:
 	npm install
@@ -14,6 +14,9 @@ android:
 
 android-dev:
 	npm run mobile:android:dev
+
+android-release:
+	npm run mobile:android:release
 
 typecheck:
 	npm run typecheck
