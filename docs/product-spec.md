@@ -30,7 +30,7 @@ The child or parent chooses one local word scope:
 - 600-word scope: 685 entries from `packages/content/word-packs/en-600.json`
 - 1500-word scope: 1500 entries from `packages/content/word-packs/en-1500.json`
 
-The 1500 scope comes from `en-1500.xls`. Its Chinese meanings are filled through the supplemental source file at `packages/content/source/en-1500-meanings.zh.json`.
+The 1500 scope was generated from `en-1500.xls`. Its Chinese meanings are filled through the supplemental source file at `packages/content/source/en-1500-meanings.zh.json`.
 
 ### Home
 

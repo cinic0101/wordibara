@@ -5,3 +5,8 @@ web-build/
 .DS_Store
 npm-debug.log*
 *.tmp
+
+# Local word-source files used only when regenerating packs.
+/en-600.pdf
+/en-1500.xls
+/en-1500.pdf

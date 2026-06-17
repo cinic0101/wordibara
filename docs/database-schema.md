@@ -128,7 +128,8 @@ Progress is keyed by `word_id`, not English text. The source data contains repea
 
 ## Content Sources
 
-- `en-600` is extracted from `en-600.pdf`; source location is `source_page`.
-- `en-1500` is extracted from `en-1500.xls`; source location is `source_sheet` and `source_row`.
+- Runtime content comes from committed generated JSON under `packages/content/word-packs/`.
+- `en-600` was generated from `en-600.pdf`; source location is `source_page`.
+- `en-1500` was generated from `en-1500.xls`; source location is `source_sheet` and `source_row`.
 - `en-1500.xls` has an `是否1200字` flag, stored as `is_1200`.
 - Both packs should have non-null `meaning_zh` in the generated JSON before seeding SQLite.

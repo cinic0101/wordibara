@@ -443,7 +443,23 @@ def write_json(path: Path, data: Any) -> None:
     )
 
 
+def validate_source_files() -> None:
+    missing = [
+        source_pack["source_path"].name
+        for source_pack in SOURCE_PACKS
+        if not source_pack["source_path"].exists()
+    ]
+    if missing:
+        missing_list = ", ".join(missing)
+        raise SystemExit(
+            "Missing local source file(s): "
+            f"{missing_list}. The generated JSON packs are committed, but "
+            "regeneration requires placing these raw source files at the repo root."
+        )
+
+
 def main() -> int:
+    validate_source_files()
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     packs: list[dict[str, Any]] = []
     pack_by_id: dict[str, dict[str, Any]] = {}

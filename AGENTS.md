@@ -6,8 +6,8 @@ Wordibara is a local-first kids English vocabulary app. The first version should
 
 ```txt
 wordibara/
-  en-600.pdf
-  en-1500.xls
+  apps/
+    mobile/
   scripts/
     extract_word_packs.py
   packages/
@@ -22,14 +22,6 @@ wordibara/
     product-spec.md
     database-schema.md
     wireframes.md
-```
-
-The mobile app has not been scaffolded yet. When implementation starts, prefer:
-
-```txt
-apps/mobile/          # Expo React Native app
-packages/core/        # quiz, review, scoring, scheduling logic
-packages/content/     # source word-pack JSON and content helpers
 ```
 
 Add `packages/ui/` only after there is real shared UI pressure.
@@ -49,9 +41,11 @@ Do not add a backend for v1.
 
 ## Content Workflow
 
-The 600 scope is extracted from `en-600.pdf`. The 1500 scope is extracted from `en-1500.xls` and supplemented with Traditional Chinese meanings from `packages/content/source/en-1500-meanings.zh.json`.
+Generated word-pack JSON is committed under `packages/content/word-packs/` and used by the app at runtime.
 
-Regenerate content with:
+The 600 scope was generated from `en-600.pdf`. The 1500 scope was generated from `en-1500.xls` and supplemented with Traditional Chinese meanings from `packages/content/source/en-1500-meanings.zh.json`.
+
+Raw source files are not committed. To regenerate content, place `en-600.pdf` and `en-1500.xls` at the repo root locally, then run:
 
 ```sh
 uv run --with pdfplumber --with xlrd python scripts/extract_word_packs.py
