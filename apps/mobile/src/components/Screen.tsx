@@ -5,22 +5,23 @@ import { colors, spacing } from "@/lib/theme";
 
 type ScreenProps = {
   children: ReactNode;
+  contentStyle?: ViewStyle;
   scroll?: boolean;
   style?: ViewStyle;
 };
 
-export function Screen({ children, scroll = true, style }: ScreenProps) {
+export function Screen({ children, contentStyle, scroll = true, style }: ScreenProps) {
   if (!scroll) {
     return (
       <SafeAreaView style={[styles.safe, style]}>
-        <View style={styles.content}>{children}</View>
+        <View style={[styles.content, styles.fixedContent, contentStyle]}>{children}</View>
       </SafeAreaView>
     );
   }
 
   return (
     <SafeAreaView style={[styles.safe, style]}>
-      <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
+      <ScrollView contentContainerStyle={[styles.content, contentStyle]} showsVerticalScrollIndicator={false}>
         {children}
       </ScrollView>
     </SafeAreaView>
@@ -36,6 +37,8 @@ const styles = StyleSheet.create({
     gap: spacing.lg,
     padding: spacing.lg,
     paddingBottom: spacing.xxl
+  },
+  fixedContent: {
+    flex: 1
   }
 });
-

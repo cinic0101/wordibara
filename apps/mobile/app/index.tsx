@@ -22,27 +22,36 @@ export default function IndexScreen() {
   }, [activeProfile, profiles.length]);
 
   return (
-    <Screen scroll={false}>
-      <View style={styles.hero}>
-        <Mascot size={190} />
-        <Text style={styles.title}>Wordibara</Text>
-        <Text style={styles.subtitle}>Build English words with a tiny learning buddy.</Text>
-      </View>
-      <View style={styles.actions}>
-        <PrimaryButton label="Start" onPress={() => router.push("/profiles")} />
-        {profiles.length > 0 ? (
-          <PrimaryButton label="Continue" tone="blue" onPress={() => router.replace("/home")} />
-        ) : null}
+    <Screen scroll={false} contentStyle={styles.screenContent}>
+      <View style={styles.centerColumn}>
+        <View style={styles.hero}>
+          <Mascot size={176} />
+          <Text style={styles.title}>Wordibara</Text>
+          <Text style={styles.subtitle}>Build English words with a tiny learning buddy.</Text>
+        </View>
+        <View style={styles.actions}>
+          <PrimaryButton label="Start" onPress={() => router.push("/profiles")} style={styles.button} />
+          {profiles.length > 0 ? (
+            <PrimaryButton label="Continue" tone="blue" onPress={() => router.replace("/home")} style={styles.button} />
+          ) : null}
+        </View>
       </View>
     </Screen>
   );
 }
 
 const styles = StyleSheet.create({
+  screenContent: {
+    justifyContent: "center"
+  },
+  centerColumn: {
+    alignItems: "center",
+    gap: spacing.xxl,
+    justifyContent: "center",
+    width: "100%"
+  },
   hero: {
     alignItems: "center",
-    flex: 1,
-    justifyContent: "center",
     gap: spacing.md
   },
   title: {
@@ -60,7 +69,11 @@ const styles = StyleSheet.create({
     textAlign: "center"
   },
   actions: {
-    gap: spacing.md
+    gap: spacing.md,
+    maxWidth: 360,
+    width: "100%"
+  },
+  button: {
+    width: "100%"
   }
 });
-
