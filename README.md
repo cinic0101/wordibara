@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="apps/mobile/assets/icon.png" alt="Wordibara logo" width="128" height="128">
+</p>
+
 # Wordibara
 
 Wordibara is a local-first English vocabulary learning app for kids. It uses short practice sessions, Chinese prompts, cute avatars, and simple game loops to help learners review English words offline.
