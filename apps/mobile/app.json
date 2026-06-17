@@ -5,6 +5,7 @@
     "scheme": "wordibara",
     "version": "0.1.0",
     "orientation": "portrait",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "backgroundColor": "#F7FFF2"
@@ -17,10 +18,15 @@
       "typedRoutes": true
     },
     "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#F7FFF2"
+      },
       "package": "com.d3rekw.wordibara"
     },
     "web": {
       "bundler": "metro",
+      "favicon": "./assets/favicon.png",
       "output": "single"
     },
     "assetBundlePatterns": [
