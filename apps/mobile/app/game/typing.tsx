@@ -90,7 +90,7 @@ export default function TypingGameScreen() {
           />
           <PrimaryButton label={result ? "Next" : "Check"} onPress={result ? next : check} style={styles.mainButton} />
         </View>
-        <PrimaryButton label="Exit" tone="ghost" onPress={() => router.back()} />
+        <PrimaryButton label="Exit" tone="ghost" onPress={() => router.replace("/home")} />
       </KeyboardAvoidingView>
     </Screen>
   );

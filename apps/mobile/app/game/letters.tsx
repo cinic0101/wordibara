@@ -145,7 +145,7 @@ export default function LetterGameScreen() {
       ) : null}
 
       <View style={styles.actions}>
-        <PrimaryButton label="Exit" tone="ghost" onPress={() => router.back()} style={styles.exit} />
+        <PrimaryButton label="Exit" tone="ghost" onPress={() => router.replace("/home")} style={styles.exit} />
         <PrimaryButton label={finished ? "Next" : isSolved ? "Next" : "Skip"} tone={finished ? "green" : "blue"} onPress={finished ? next : () => finish("lost", masked.join(""))} style={styles.next} />
       </View>
     </Screen>

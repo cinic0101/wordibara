@@ -53,7 +53,7 @@ export default function CreateProfileScreen() {
         <TextInputBox value={name} onChangeText={setName} placeholder="Mia" autoCapitalize="words" />
       </View>
       <PrimaryButton label="Continue" onPress={handleCreate} />
-      <PrimaryButton label="Back" tone="ghost" onPress={() => router.back()} />
+      <PrimaryButton label="Back" tone="ghost" onPress={() => router.replace("/profiles")} />
     </Screen>
   );
 }
