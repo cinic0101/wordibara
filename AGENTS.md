@@ -19,14 +19,20 @@ wordibara/
         en-600.json
         en-1500.json
   docs/
+    README.md
+    development.md
+    privacy.md
     product-spec.md
     database-schema.md
     wireframes.md
+  CONTRIBUTING.md
+  SECURITY.md
+  CODE_OF_CONDUCT.md
 ```
 
 Add `packages/ui/` only after there is real shared UI pressure.
 
-## Planned Stack
+## Current Stack
 
 - Expo + React Native + TypeScript
 - Expo Router
@@ -48,7 +54,7 @@ The 600 scope was generated from `en-600.pdf`. The 1500 scope was generated from
 Raw source files are not committed. To regenerate content, place `en-600.pdf` and `en-1500.xls` at the repo root locally, then run:
 
 ```sh
-uv run --with pdfplumber --with xlrd python scripts/extract_word_packs.py
+npm run extract:words
 ```
 
 Current generated packs:
@@ -57,6 +63,8 @@ Current generated packs:
 - `en-1500`: 1500 entries, 1497 unique answer strings, 36 canonical topics
 
 Keep duplicate English answers as separate entries when the Chinese meaning or topic differs. Progress must key by `word_id`, not by answer text.
+
+For open-source publishing, verify redistribution rights for vocabulary source material and derived generated JSON before public release.
 
 ## Product Rules
 
@@ -72,9 +80,11 @@ Keep duplicate English answers as separate entries when the Chinese meaning or t
 ## Privacy Rules
 
 - Store child data locally in SQLite only.
+- The web preview may use browser local storage as a development fallback.
 - Do not send profile, progress, device identifier, or usage data to third parties.
 - Do not add ads or analytics SDKs.
 - Keep parent/legal/settings content behind a parental gate if external links, purchases, or destructive actions are added later.
+- Update `docs/privacy.md` with any privacy-sensitive product change.
 
 ## Implementation Expectations
 
@@ -84,3 +94,4 @@ Keep duplicate English answers as separate entries when the Chinese meaning or t
 - Do not hard-code word lists inside components. Load from generated content JSON and seed SQLite.
 - Prefer simple, explicit data migrations over implicit runtime mutation.
 - Before changing generated word-pack JSON, update the extractor first unless the change is a documented manual source-data correction.
+- Keep public setup and contributor guidance in `README.md`, `CONTRIBUTING.md`, and `docs/development.md`.

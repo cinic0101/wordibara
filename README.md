@@ -1,20 +1,21 @@
 # Wordibara
 
-A playful kids' English vocabulary app.
+Wordibara is a local-first English vocabulary learning app for kids. It uses short practice sessions, Chinese prompts, cute avatars, and simple game loops to help learners review English words offline.
 
-## Current Status
+The project is currently an early v1 Expo app. It has local profiles, word-scope selection, two vocabulary games, wrong-word review, collection/settings screens, and committed generated word packs.
 
-This repo contains the first Expo mobile app implementation with local profiles, word-scope selection, two vocabulary games, review, and collection screens.
+## Features
 
-Start here:
+- Local learner profiles with avatar and display name only
+- 600-scope and 1500-scope word packs
+- Chinese-to-English typing game
+- Word-pattern letter game
+- Wrong-word logging and review flow
+- Offline local persistence with SQLite on native platforms
+- Web preview fallback using browser local storage
+- No backend, login, ads, analytics, microphone, or child profile upload in v1
 
-- [Product spec](docs/product-spec.md)
-- [Database schema](docs/database-schema.md)
-- [Wireframes](docs/wireframes.md)
-- [Agent guide](AGENTS.md)
-- [Word-pack data](packages/content/word-packs/README.md)
-
-## Run The App
+## Quick Start
 
 Install dependencies:
 
@@ -22,118 +23,75 @@ Install dependencies:
 npm install
 ```
 
-Start the mobile app:
+Run the Expo dev server:
 
 ```sh
 npm run mobile
 ```
 
-Start the web preview:
+Run the web preview:
 
 ```sh
 npm run mobile:web
 ```
 
-Open on a running Android emulator, such as Pixel 9:
+Run on Android:
 
 ```sh
-npm run mobile:android
-# or
 make android
 ```
 
-That starts Expo and opens the app through Expo Go, which is the fastest v1 workflow.
-
-If you do not want the Expo Go launcher/debug pages, install Wordibara directly on the emulator:
-
-```sh
-npm run mobile:android:dev
-# or
-make android-dev
-```
-
-Use this native debug build when you want the emulator to open the Wordibara app directly. It may generate native Android project files.
-
-For a production-like local Android install:
-
-```sh
-npm run mobile:android:release
-# or
-make android-release
-```
-
-The root Android scripts auto-detect the Android SDK at `$HOME/Library/Android/sdk` when `ANDROID_HOME` is not set, and write `apps/mobile/android/local.properties` for local Gradle builds when the generated native folder exists.
-
-If Expo opens a development-client URL after install, launch the installed app directly:
-
-```sh
-make android-launch
-```
-
-### Install On A Real Android Device
-
-1. Connect the phone by USB.
-2. Enable developer mode on the phone: Settings > About phone > tap Build number 7 times.
-3. Enable USB debugging: Settings > System > Developer options > USB debugging.
-4. Accept the RSA debugging prompt on the phone after connecting it to the Mac.
-5. Check that ADB sees it:
-
-```sh
-make android-devices
-```
-
-On macOS, Android Studio's SDK platform tools are usually enough; you normally do not need an extra USB driver. Windows may need the phone vendor's OEM USB driver.
-
-If only one Android device is connected:
+Install a local Android release build:
 
 ```sh
 make android-release
 make android-launch
 ```
 
-If both an emulator and a real phone are connected, use Expo's device picker:
+More setup and device notes are in [Development](docs/development.md).
 
-```sh
-make android-release-device
+## Project Layout
+
+```txt
+apps/mobile/                    Expo React Native app
+packages/content/word-packs/    Generated JSON vocabulary packs
+packages/content/source/        Supplemental content source data
+scripts/                        Content and local environment helpers
+docs/                           Product, data, privacy, and setup docs
 ```
 
-For direct ADB launch on a specific connected device, copy the serial from `make android-devices`:
+## Documentation
 
-```sh
-ANDROID_SERIAL=<device-serial> make android-launch
-```
-
-If install fails with `INSTALL_FAILED_USER_RESTRICTED`, the APK built successfully but the phone blocked ADB installation. On Xiaomi/Redmi/MIUI devices, check Developer options and enable:
-
-- USB debugging
-- Install via USB
-- USB debugging (Security settings), if present
-
-Keep the phone unlocked and accept any install confirmation prompt. Then retry the already-built APK without rebuilding:
-
-```sh
-ANDROID_SERIAL=<device-serial> make android-install-release
-ANDROID_SERIAL=<device-serial> make android-launch
-```
+- [Docs index](docs/README.md)
+- [Development setup](docs/development.md)
+- [Product spec](docs/product-spec.md)
+- [Database schema](docs/database-schema.md)
+- [Wireframes](docs/wireframes.md)
+- [Privacy notes](docs/privacy.md)
+- [Word-pack data](packages/content/word-packs/README.md)
+- [Agent guide](AGENTS.md)
 
 ## Word Packs
 
-Generated JSON packs are committed under `packages/content/word-packs/` and are what the app uses at runtime.
-
-Raw source files are not committed. To regenerate JSON packs, place these files at the repo root locally:
-
-- `en-600.pdf`
-- `en-1500.xls`
-
-Then run:
-
-```sh
-uv run --with pdfplumber --with xlrd python scripts/extract_word_packs.py
-```
+Runtime content comes from generated JSON files committed under `packages/content/word-packs/`.
 
 Current packs:
 
 - `en-600`: 685 entries generated from `en-600.pdf`
 - `en-1500`: 1500 entries generated from `en-1500.xls`
 
-The 1500 Excel source does not include Chinese meanings, so missing meanings are supplied by `packages/content/source/en-1500-meanings.zh.json`.
+Raw source files are not committed. To regenerate the JSON packs, place `en-600.pdf` and `en-1500.xls` at the repo root locally, then run:
+
+```sh
+npm run extract:words
+```
+
+Important: verify redistribution rights for vocabulary source material before publishing or redistributing derived content.
+
+## Contributing
+
+Contributions are welcome while the app is still early. Start with [CONTRIBUTING.md](CONTRIBUTING.md), and keep privacy constraints in mind: no child tracking, no ads, no backend child profiles, and no external analytics in v1.
+
+## License
+
+Code is licensed under the [Apache License 2.0](LICENSE). Vocabulary/source data may have separate provenance and redistribution requirements; see the word-pack docs before reusing content.

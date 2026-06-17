@@ -6,6 +6,8 @@ Wordibara helps kids learn English vocabulary through short, repeatable games us
 
 V1 is local-first. It should work without account creation, internet, backend sync, ads, analytics, microphone, or AI chat.
 
+Privacy constraints are tracked in [Privacy Notes](privacy.md).
+
 ## Users
 
 - Child learner: chooses a profile, plays short vocabulary games, reviews wrong words.
@@ -122,3 +124,9 @@ Keep animations short and skippable through normal interaction. Learning text mu
 - open chatbot
 - microphone features
 - dynamically generated word packs
+
+## Open-Source Release Notes
+
+- Keep public setup instructions in `README.md` and `docs/development.md`.
+- Keep contribution expectations in `CONTRIBUTING.md`.
+- Verify vocabulary source and generated-data redistribution rights before public release.

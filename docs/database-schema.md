@@ -1,6 +1,8 @@
 # Wordibara Local Database Schema
 
-V1 should use SQLite through `expo-sqlite`. Seed data comes from `packages/content/word-packs/*.json`.
+V1 uses SQLite through `expo-sqlite` on native platforms. Seed data comes from `packages/content/word-packs/*.json`.
+
+The web preview uses browser local storage as a development fallback and does not mirror this SQLite schema exactly.
 
 ## Tables
 
