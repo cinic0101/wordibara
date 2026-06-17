@@ -34,6 +34,26 @@ Start the web preview:
 npm run mobile:web
 ```
 
+Open on a running Android emulator, such as Pixel 9:
+
+```sh
+npm run mobile:android
+# or
+make android
+```
+
+That starts Expo and opens the app through Expo Go, which is the fastest v1 workflow.
+
+For an actual debug APK install on the emulator:
+
+```sh
+npm run mobile:android:dev
+# or
+make android-dev
+```
+
+Use the debug build path only when you need native build behavior. It may generate native Android project files.
+
 ## Word Packs
 
 Generated JSON packs are committed under `packages/content/word-packs/` and are what the app uses at runtime.
