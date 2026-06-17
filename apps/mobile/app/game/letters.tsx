@@ -17,16 +17,53 @@ export default function LetterGameScreen() {
   const progress = useAppStore((state) => state.progress);
   const recordAnswer = useAppStore((state) => state.recordAnswer);
   const pack = getPack(profile?.selectedPackId);
-  const [words] = useState(() => selectLetterWords(pack, progress, 10));
+  const [words, setWords] = useState<ReturnType<typeof selectLetterWords>>([]);
   const [index, setIndex] = useState(0);
-  const word = words[index] ?? pack.entries.find((entry) => entry.letterGameEligible) ?? pack.entries[0];
-  const answer = word.answerText;
-  const maxWrong = chanceCount(answer);
   const [guessed, setGuessed] = useState<Set<string>>(new Set());
-  const [revealed, setRevealed] = useState<Set<number>>(initialRevealedIndexes(answer));
+  const [revealed, setRevealed] = useState<Set<number>>(new Set());
   const [wrongCount, setWrongCount] = useState(0);
   const [finished, setFinished] = useState<"won" | "lost" | null>(null);
 
+  function startRound(count: 5 | 10) {
+    const selectedWords = selectLetterWords(pack, progress, count);
+    const firstWord = selectedWords[0];
+    setWords(selectedWords);
+    setIndex(0);
+    setGuessed(new Set());
+    setRevealed(firstWord ? initialRevealedIndexes(firstWord.answerText) : new Set());
+    setWrongCount(0);
+    setFinished(null);
+  }
+
+  if (words.length === 0) {
+    return (
+      <Screen scroll={false} contentStyle={styles.setupScreen}>
+        <View style={styles.setupPanel}>
+          <Text style={styles.setupTitle}>Letter Game</Text>
+          <Text style={styles.setupSubtitle}>Round size</Text>
+          <View style={styles.setupButtons}>
+            <PrimaryButton
+              label="5 words"
+              tone="yellow"
+              onPress={() => startRound(5)}
+              style={styles.setupButton}
+            />
+            <PrimaryButton
+              label="10 words"
+              tone="blue"
+              onPress={() => startRound(10)}
+              style={styles.setupButton}
+            />
+          </View>
+          <PrimaryButton label="Exit" tone="ghost" onPress={() => router.replace("/home")} />
+        </View>
+      </Screen>
+    );
+  }
+
+  const word = words[index] ?? pack.entries.find((entry) => entry.letterGameEligible) ?? pack.entries[0];
+  const answer = word.answerText;
+  const maxWrong = chanceCount(answer);
   const masked = answer
     .split("")
     .map((letter, i) => (revealed.has(i) || guessed.has(letter) ? letter : "_"));
@@ -153,6 +190,32 @@ export default function LetterGameScreen() {
 }
 
 const styles = StyleSheet.create({
+  setupScreen: {
+    justifyContent: "center"
+  },
+  setupPanel: {
+    gap: spacing.lg
+  },
+  setupTitle: {
+    color: colors.ink,
+    fontSize: 34,
+    fontWeight: "900",
+    textAlign: "center"
+  },
+  setupSubtitle: {
+    color: colors.muted,
+    fontSize: 16,
+    fontWeight: "900",
+    textAlign: "center",
+    textTransform: "uppercase"
+  },
+  setupButtons: {
+    flexDirection: "row",
+    gap: spacing.md
+  },
+  setupButton: {
+    flex: 1
+  },
   header: {
     alignItems: "center",
     flexDirection: "row",

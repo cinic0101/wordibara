@@ -5,12 +5,21 @@ export function getProgress(progress: Record<string, WordProgress>, wordId: stri
   return progress[wordId] ?? null;
 }
 
+function shuffle<T>(items: T[]): T[] {
+  const shuffled = [...items];
+  for (let i = shuffled.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
 export function selectTypingWords(
   pack: WordPack,
   progress: Record<string, WordProgress>,
   limit = 30
 ): WordEntry[] {
-  return [...pack.entries]
+  const prioritized = [...pack.entries]
     .sort((left, right) => {
       const lp = getProgress(progress, left.id);
       const rp = getProgress(progress, right.id);
@@ -21,8 +30,12 @@ export function selectTypingWords(
       const rm = rp?.masteryScore ?? 0;
       if (lm !== rm) return lm - rm;
       return left.displayOrder - right.displayOrder;
-    })
-    .slice(0, limit);
+    });
+  const priorityPool = prioritized.slice(
+    0,
+    Math.min(prioritized.length, Math.max(limit * 4, limit))
+  );
+  return shuffle(priorityPool).slice(0, limit);
 }
 
 export function selectLetterWords(
@@ -71,4 +84,3 @@ export function initialRevealedIndexes(word: string): Set<number> {
   if (word.length > 3) revealed.add(word.length - 1);
   return revealed;
 }
-

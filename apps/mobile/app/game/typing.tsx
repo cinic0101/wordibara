@@ -17,10 +17,43 @@ export default function TypingGameScreen() {
   const progress = useAppStore((state) => state.progress);
   const recordAnswer = useAppStore((state) => state.recordAnswer);
   const pack = getPack(profile?.selectedPackId);
-  const [words] = useState(() => selectTypingWords(pack, progress, 10));
+  const [words, setWords] = useState<ReturnType<typeof selectTypingWords>>([]);
   const [index, setIndex] = useState(0);
   const [answer, setAnswer] = useState("");
   const [result, setResult] = useState<"correct" | "wrong" | null>(null);
+
+  function startRound(count: 5 | 10) {
+    setWords(selectTypingWords(pack, progress, count));
+    setIndex(0);
+    setAnswer("");
+    setResult(null);
+  }
+
+  if (words.length === 0) {
+    return (
+      <Screen scroll={false} contentStyle={styles.setupScreen}>
+        <View style={styles.setupPanel}>
+          <Text style={styles.setupTitle}>Type English</Text>
+          <Text style={styles.setupSubtitle}>Round size</Text>
+          <View style={styles.setupButtons}>
+            <PrimaryButton
+              label="5 words"
+              tone="yellow"
+              onPress={() => startRound(5)}
+              style={styles.setupButton}
+            />
+            <PrimaryButton
+              label="10 words"
+              onPress={() => startRound(10)}
+              style={styles.setupButton}
+            />
+          </View>
+          <PrimaryButton label="Exit" tone="ghost" onPress={() => router.replace("/home")} />
+        </View>
+      </Screen>
+    );
+  }
+
   const word = words[index] ?? pack.entries[0];
 
   async function check() {
@@ -97,6 +130,32 @@ export default function TypingGameScreen() {
 }
 
 const styles = StyleSheet.create({
+  setupScreen: {
+    justifyContent: "center"
+  },
+  setupPanel: {
+    gap: spacing.lg
+  },
+  setupTitle: {
+    color: colors.ink,
+    fontSize: 34,
+    fontWeight: "900",
+    textAlign: "center"
+  },
+  setupSubtitle: {
+    color: colors.muted,
+    fontSize: 16,
+    fontWeight: "900",
+    textAlign: "center",
+    textTransform: "uppercase"
+  },
+  setupButtons: {
+    flexDirection: "row",
+    gap: spacing.md
+  },
+  setupButton: {
+    flex: 1
+  },
   wrap: {
     flex: 1,
     gap: spacing.lg
