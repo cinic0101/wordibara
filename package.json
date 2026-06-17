@@ -1,0 +1,14 @@
+{
+  "name": "wordibara",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "apps/mobile"
+  ],
+  "scripts": {
+    "extract:words": "uv run --with pdfplumber --with xlrd python scripts/extract_word_packs.py",
+    "mobile": "npm run start --workspace @wordibara/mobile",
+    "mobile:web": "npm run web --workspace @wordibara/mobile",
+    "typecheck": "npm run typecheck --workspace @wordibara/mobile"
+  }
+}

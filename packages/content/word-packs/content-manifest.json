@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "packs": [
+    {
+      "packId": "en-600",
+      "title": "600-word scope",
+      "sourceFile": "en-600.pdf",
+      "sourceType": "pdf",
+      "sourceSha256": "01e2e5461b7147b135ee0a26797ee83610a9c14f15ec35cef1f3f8d9e05e5b7c",
+      "wordCount": 685,
+      "uniqueAnswerCount": 657,
+      "topicCount": 35
+    },
+    {
+      "packId": "en-1500",
+      "title": "1500-word scope",
+      "sourceFile": "en-1500.xls",
+      "sourceType": "xls",
+      "sourceSha256": "d2fcbb4ad080176a26da02fcfee565843924c9eb0ea1437c9f98e25bab7ce9fa",
+      "wordCount": 1500,
+      "uniqueAnswerCount": 1497,
+      "topicCount": 36
+    }
+  ],
+  "sourceWarnings": []
+}
