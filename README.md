@@ -62,6 +62,14 @@ npm run mobile:android:release
 make android-release
 ```
 
+The root Android scripts auto-detect the Android SDK at `$HOME/Library/Android/sdk` when `ANDROID_HOME` is not set, and write `apps/mobile/android/local.properties` for local Gradle builds when the generated native folder exists.
+
+If Expo opens a development-client URL after install, launch the installed app directly:
+
+```sh
+make android-launch
+```
+
 ## Word Packs
 
 Generated JSON packs are committed under `packages/content/word-packs/` and are what the app uses at runtime.

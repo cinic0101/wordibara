@@ -8,9 +8,10 @@
   "scripts": {
     "extract:words": "uv run --with pdfplumber --with xlrd python scripts/extract_word_packs.py",
     "mobile": "npm run start --workspace @wordibara/mobile",
-    "mobile:android": "npm run android --workspace @wordibara/mobile",
-    "mobile:android:dev": "npm run android:dev --workspace @wordibara/mobile",
-    "mobile:android:release": "npm run android:release --workspace @wordibara/mobile",
+    "mobile:android": "sh scripts/with_android_env.sh npm run android --workspace @wordibara/mobile",
+    "mobile:android:dev": "sh scripts/with_android_env.sh npm run android:dev --workspace @wordibara/mobile",
+    "mobile:android:launch": "sh scripts/with_android_env.sh adb shell monkey -p com.d3rekw.wordibara -c android.intent.category.LAUNCHER 1",
+    "mobile:android:release": "sh scripts/with_android_env.sh npm run android:release --workspace @wordibara/mobile",
     "mobile:web": "npm run web --workspace @wordibara/mobile",
     "typecheck": "npm run typecheck --workspace @wordibara/mobile"
   }
