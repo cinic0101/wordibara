@@ -70,6 +70,39 @@ If Expo opens a development-client URL after install, launch the installed app d
 make android-launch
 ```
 
+### Install On A Real Android Device
+
+1. Connect the phone by USB.
+2. Enable developer mode on the phone: Settings > About phone > tap Build number 7 times.
+3. Enable USB debugging: Settings > System > Developer options > USB debugging.
+4. Accept the RSA debugging prompt on the phone after connecting it to the Mac.
+5. Check that ADB sees it:
+
+```sh
+make android-devices
+```
+
+On macOS, Android Studio's SDK platform tools are usually enough; you normally do not need an extra USB driver. Windows may need the phone vendor's OEM USB driver.
+
+If only one Android device is connected:
+
+```sh
+make android-release
+make android-launch
+```
+
+If both an emulator and a real phone are connected, use Expo's device picker:
+
+```sh
+make android-release-device
+```
+
+For direct ADB launch on a specific connected device, copy the serial from `make android-devices`:
+
+```sh
+ANDROID_SERIAL=<device-serial> make android-launch
+```
+
 ## Word Packs
 
 Generated JSON packs are committed under `packages/content/word-packs/` and are what the app uses at runtime.
