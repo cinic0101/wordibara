@@ -103,6 +103,19 @@ For direct ADB launch on a specific connected device, copy the serial from `make
 ANDROID_SERIAL=<device-serial> make android-launch
 ```
 
+If install fails with `INSTALL_FAILED_USER_RESTRICTED`, the APK built successfully but the phone blocked ADB installation. On Xiaomi/Redmi/MIUI devices, check Developer options and enable:
+
+- USB debugging
+- Install via USB
+- USB debugging (Security settings), if present
+
+Keep the phone unlocked and accept any install confirmation prompt. Then retry the already-built APK without rebuilding:
+
+```sh
+ANDROID_SERIAL=<device-serial> make android-install-release
+ANDROID_SERIAL=<device-serial> make android-launch
+```
+
 ## Word Packs
 
 Generated JSON packs are committed under `packages/content/word-packs/` and are what the app uses at runtime.

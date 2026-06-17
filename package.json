@@ -12,6 +12,7 @@
     "mobile:android:dev": "sh scripts/with_android_env.sh npm run android:dev --workspace @wordibara/mobile",
     "mobile:android:dev:device": "sh scripts/with_android_env.sh npm run android:dev:device --workspace @wordibara/mobile",
     "mobile:android:devices": "sh scripts/with_android_env.sh adb devices -l",
+    "mobile:android:install-release": "sh scripts/with_android_env.sh adb install -r -d --user 0 apps/mobile/android/app/build/outputs/apk/release/app-release.apk",
     "mobile:android:launch": "sh scripts/with_android_env.sh adb shell monkey -p com.d3rekw.wordibara -c android.intent.category.LAUNCHER 1",
     "mobile:android:release": "sh scripts/with_android_env.sh npm run android:release --workspace @wordibara/mobile",
     "mobile:android:release:device": "sh scripts/with_android_env.sh npm run android:release:device --workspace @wordibara/mobile",
