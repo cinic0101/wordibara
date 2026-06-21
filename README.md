@@ -45,6 +45,8 @@ Run on Android:
 make android
 ```
 
+`make android` uses Expo Go. If your shell has `EXPO_OFFLINE=1`, the wrapper clears it for this target; use `make android-dev` for a native debug build instead.
+
 Install a local Android release build:
 
 ```sh

@@ -57,6 +57,14 @@ make android
 
 That opens through Expo Go and is the fastest iteration path.
 
+If your shell exports `EXPO_OFFLINE=1`, the `make android` wrapper clears it before launching Expo Go. Expo Go may need network access the first time it installs or opens on a fresh emulator.
+
+If you want a native debug app instead of Expo Go, run:
+
+```sh
+make android-dev
+```
+
 For a native app install:
 
 ```sh
